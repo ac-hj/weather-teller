@@ -1,18 +1,23 @@
 <!DOCTYPE html> 
 <html>
 <head>
-	<title>Map</title>
+	<title>Weather Map</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script defer src="https://maps.googleapis.com/maps/api/js?key=[Your API Key]&callback=initMap"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript">
+		// Google map
 		var map;
+		// marker on the map
 		var marker;
+		// name of the selected location
 		var loc;
+		// current weather object
 		var weather;
 		// True = celsius, False = farenheit
 		var temp = true;
+		// array of 7-day weather forecast objects
 		var days;
 		
 		// Initializing the map
@@ -122,38 +127,49 @@
 				displayMarker(event.latLng.lat(), event.latLng.lng())
 			});
 		};
+
 		function displayMarker(latitude, longitude) {
+			// Initializing marker
 			marker = new google.maps.Marker({
 		 						position: new google.maps.LatLng(parseFloat(latitude), parseFloat(longitude)),
 			 					draggable: false,
 			 					map,
 			 					icon: {
-			 						url: "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png"
+			 						url: "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png" // yellow marker
 			 					}
 		 					});
+			// show marker on the map
 			marker.setMap(map);
 		}
+
+		// Creates 7-day weather forecast HTML elements
 		function setWeatherForecast(today, months, days, day, celsius) {
 			today.setDate(today.getDate() + 1);
 					var dd = String(today.getDate()).padStart(2, '0');
 					var mm = months[today.getMonth()]; //January is 0!
+
 					var yyyy = today.getFullYear();
 					today_d = mm + " " + dd + ', ' + yyyy;
-					console.log(days)
-					console.log(days[0])
+
 					var descript = days[day-2]["weather"][0]["description"]
 					var id_1 = "d" + day;
 					var id_2 = "d" + day + "_t";
 					var id_3 = "temp" + "_" + day;
 					var emoji_p = ""
+
+
 					if (descript.toLowerCase().includes("sun") || descript.toLowerCase().includes("clear")) {
 						emoji_p = "../styles/Sun.png" 
 					} else if (descript.toLowerCase().includes("cloud")) {
 						emoji_p = "../styles/Clouds.png"
 					} else if (descript.toLowerCase().includes("rain")) {
 						emoji_p = "../styles/Rain.png"
+					} else if (descript.toLowerCase().includes("snow")) {
+						emoji_p = "../styles/Snow.png"
 					}
+
 					document.getElementById(id_1).innerHTML = `${today_d}`;
+
 					if (celsius) {
 						document.getElementById(id_2).innerHTML = ` <img id="weather-pic" src=${emoji_p}></img><br>
 																${descript[0].toUpperCase() + descript.slice(1).toLowerCase()} <br>
@@ -168,6 +184,8 @@
 															`;
 					}
 		}
+
+		// Converts each weather forecast html object to display celsius or fahrenheit, depending which one was chosen
 		function updateWeatherForecast(days, i) {
 			var id = "temp_" + i;
 			if (temp) {
@@ -182,32 +200,41 @@
 														`;
 			}
 		}
+
 		$(document).ready(function() {
+
+			// event listener for fahrenheit btn
 			$("#farenheit").on("click", function(){
+				
+				// changes the background color of the btns
 				$("#farenheit").addClass("active");
 				$("#celsius").removeClass("active");
+				
 				temp = false;
 				
-				console.log(weather)
+				// changes the current temperature to fahrenheit
 				document.getElementById("weather-details").innerHTML = `
-				Feels like: ${Number((weather["feels_like"] - 273.15)* 9/5 + 32).toFixed(1) + " °F"} <br>
-				Description: ${cloud} <br>
-				Humidity: ${weather["humidity"]} <br>
-				Temperature High: ${Number((weather["temp_max"] - 273.15)* 9/5 + 32).toFixed(1) + " °F"} <br>
-				Temperature Low: ${Number((weather["temp_min"] - 273.15)* 9/5 + 32).toFixed(1) + " °F"} <br>
-				<div class="form-group mx-sm-3 mb-2">
-						<button id="back" class="btn btn-light">Go back</button>
-				</div>
-			`	
-				console.log(days)
+							Feels like: ${Number((weather["feels_like"] - 273.15)* 9/5 + 32).toFixed(1) + " °F"} <br>
+							Description: ${cloud} <br>
+							Humidity: ${weather["humidity"]} <br>
+							Temperature High: ${Number((weather["temp_max"] - 273.15)* 9/5 + 32).toFixed(1) + " °F"} <br>
+							Temperature Low: ${Number((weather["temp_min"] - 273.15)* 9/5 + 32).toFixed(1) + " °F"} <br>
+							<div class="form-group mx-sm-3 mb-2">
+									<button id="back" class="btn btn-light">Go back</button>
+							</div>
+				`	
+				
+				// changing for the first day in the 7-day forecast
 				document.getElementById("temps_1").innerHTML = `
 														Highest temp: ${Number((days[6]["temp"]["max"] - 273.15)* 9/5 + 32).toFixed(1) + " °F"} <br>
 														Lowest temp: ${Number((days[6]["temp"]["min"] - 273.15)* 9/5 + 32).toFixed(1) + " °F"}
 													`;
+				// updating rest of the forecasts to show temperatures in fahrenheit 
 				var i;
 				for (i = 2; i < 8; i ++) {
 					updateWeatherForecast(days, i);
 				}
+				// adding this event listener for back button again to ensure that the buttons functions as it should after re-adding
 				$('#back').on("click", function() {
 						$(".sub-info").css("display", "flex");
 						$(".card").css("display", "none");
@@ -215,20 +242,28 @@
 						$("#arrow").css("display", "none");
 				});
 			})
+
+			// event listener for celsius btn
 			$("#celsius").on("click", function(){
+				// changes the background color of the btns
 				$("#celsius").addClass("active");
 				$("#farenheit").removeClass("active");
+
 				temp = true;
+
+				// changes the current temperature to fahrenheit
 				document.getElementById("weather-details").innerHTML = `
-				Feels like: ${Number(weather["feels_like"] - 273.15).toFixed(1) + " °C"} <br>
-				Description: ${cloud} <br>
-				Humidity: ${weather["humidity"]} <br>
-				Temperature High: ${Number(weather["temp_max"] - 273.15).toFixed(1) + " °C"} <br>
-				Temperature Low: ${Number(weather["temp_min"] - 273.15).toFixed(1) + " °C"} <br>
-				<div class="form-group mx-sm-3 mb-2">
-						<button id="back" class="btn btn-light">Go back</button>
-				</div>
-			`
+							Feels like: ${Number(weather["feels_like"] - 273.15).toFixed(1) + " °C"} <br>
+							Description: ${cloud} <br>
+							Humidity: ${weather["humidity"]} <br>
+							Temperature High: ${Number(weather["temp_max"] - 273.15).toFixed(1) + " °C"} <br>
+							Temperature Low: ${Number(weather["temp_min"] - 273.15).toFixed(1) + " °C"} <br>
+							<div class="form-group mx-sm-3 mb-2">
+									<button id="back" class="btn btn-light">Go back</button>
+							</div>
+				` 
+
+				// changing for the first day in the 7-day forecast
 				document.getElementById("temps_1").innerHTML = `Highest temp: ${Number(days[6]["temp"]["max"] - 273.15).toFixed(1) + " °C"} <br>
 														Lowest temp: ${Number(days[6]["temp"]["min"] - 273.15).toFixed(1) + " °C"}
 													`;
@@ -236,6 +271,8 @@
 				for (i = 2; i < 8; i ++) {
 					updateWeatherForecast(days, i);
 				}
+				
+				// again, adding the event listener for the back btn
 				$('#back').on("click", function() {
 						$(".sub-info").css("display", "flex");
 						$(".card").css("display", "none");
@@ -243,20 +280,33 @@
 						$("#arrow").css("display", "none");
 				});
 			})
-			document.onscroll = function() {
-				if (window.innerHeight + window.scrollY > document.body.clientHeight) {
-					document.getElementById("arrow").css("display",'none');
-				}
-			}
+
+
+			// document.onscroll = function() {
+			// 	if (window.innerHeight + window.scrollY > document.body.clientHeight) {
+			// 		document.getElementById("arrow").css("display",'none');
+			// 	}
+			// }
+			
+			// hiding the current weather HTML elements in the beginning
 			$(".card").css("display", "none");
+
+			// hiding the forecast HTML elements, as well as the arrow to navigate to the forecast elements
 			$(".background-2").css("display", "none");
 			$("#arrow").css("display", "none");
+			
+			// event listener for "Check" button, which shows the weather for the location when clicked
 			$('#update').on("click", function() {
 				var latitude = document.getElementById("latitude").value;
 				var longitude = document.getElementById("longitude").value;
+
+				// hiding the longitude and latitude elements
 				$(".sub-info").css("display", "none");
+				// displaying the current weather and forecast elements now
 				$(".card").css("display", "flex");
 				$(".background-2").css("display", "flex");
+
+				// API Call to get the current weather 
 				$.getJSON('https://api.openweathermap.org/data/2.5/weather?', {
 					lat: latitude,
 					lon: longitude,
@@ -268,6 +318,8 @@
 					cloud = data["weather"][0]["description"]
 					document.getElementById("weather-card").innerHTML = `Weather for ${loc} right now`;
 					document.getElementById("seven-forecast").innerHTML = `Daily`
+
+					// Checking if the weather should be in fahrenheit or celsius
 					if (temp) {
 						document.getElementById("weather-details").innerHTML = `
 						Feels like: ${Number(weather["feels_like"] - 273.15).toFixed(1) + " °C"} <br>
@@ -292,6 +344,7 @@
 					`
 					}
 					
+					// displaying designs based on the weather 
 					if (cloud.toLowerCase().includes("cloud")) {
 						$("#me").attr('src',"../styles/Potato_Cloud.gif");
 					} else if (cloud.toLowerCase().includes("rain")) {
@@ -300,6 +353,7 @@
 						$("#me").attr('src',"../styles/Potato_Sunny.png");
 						$("#me").css("width", "20vw");
 					} 
+
 					$('#back').on("click", function() {
 						$(".sub-info").css("display", "flex");
 						$(".card").css("display", "none");
@@ -307,6 +361,7 @@
 						$("#arrow").css("display", "none");
 					});
 				});
+
 				// Get 7-day forecast using a different API
 				// Could have used this for current weather too but this API does not include the location name
 				$.getJSON('https://api.openweathermap.org/data/2.5/onecall?',  {
@@ -333,16 +388,20 @@
 					var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 					var yyyy = today.getFullYear();
 					today_d = mm + '/' + dd + '/' + yyyy;
+
 					var descript = day_1["weather"][0]["description"]
 					var emoji_p = ""
+
 					if (descript.toLowerCase().includes("sun") || descript.toLowerCase().includes("clear")) {
 						emoji_p = "../styles/Sun.png" 
 					} else if (descript.toLowerCase().includes("cloud")) {
 						emoji_p = "../styles/Clouds.png"
 					} else if (descript.toLowerCase().includes("rain")) {
 						emoji_p = "../styles/Rain.png"
+					} else if (descript.toLowerCase().includes("snow")) {
+						emoji_p = "../styles/Snow.png"
 					}
-					console.log(emoji_p)
+					
 					if (temp) {
 						document.getElementById("d1").innerHTML = `Tomorrow`;
 						document.getElementById("d1_t").innerHTML = ` <img id="weather-pic" src=${emoji_p}></img><br>
@@ -358,10 +417,12 @@
 																Lowest temp: ${Number((day_1["temp"]["min"] - 273.15)* 9/5 + 32).toFixed(1) + " °F</p>"}
 															`;
 					}
+
 					var i;
 					for (i = 2; i < 8; i ++) {
 						setWeatherForecast(today, months, days, i, temp);
 					}
+					// show the arrow now!
 					$("#arrow").css("display", "flex");
 				});
 			})
@@ -371,6 +432,7 @@
 		p {
 			margin: 0;
 		}
+
 		.background {
 			/* background-image: linear-gradient(#61B5D5, #8D61D5, #F3B8C9); */
 			background-image: url("../styles/background-2.png");
@@ -381,12 +443,14 @@
 			justify-content: center;
 			align-items: center;
 		}
+
 		#map {
 			height: 60vh;
 			width: 60vh;
 			border-radius: 30px;
 			margin-right: 5vw;
 		}
+
 		.sub-background {
 			background : rgba(250, 250, 250, 0.7);
 			border-radius: 30px;
@@ -397,20 +461,24 @@
 			align-items: center;
 			height: 70vh;
 		}
+
 		#info {
 			display: flex;
 			flex-direction: row;
 			border-radius: 30px;
 			width: 50vw;
 		}
+
 		#me {
 			height: 32vw;
 		}
+
 		#instruction {
 			font-size: 3vh;
 			width: 25vw;
 			text-align: center;
 		}
+
 		.sub-info {
 			display: flex;
 			flex-direction: column;
@@ -422,39 +490,47 @@
 			font-size: 5vh;
 			text-align: center;
 		}
+
 		input[type=text] {
 			background-color: transparent;
 			box-shadow: inset 0px 0px 0px 0px red;
 			outline-color: black;
 			outline: 0;
 		}
+
 		input {
 			border: 0;
 			outline: 0;
 			border-bottom: 2px solid black;
 		}
+
 		input[type=text]:focus{
 			outline: none;     
 		}
+
 		.loc-form {
 			display: flex;
 			flex-direction: column;
 			justify-content: space-evenly;
 			height: 14vh;
 		}
+
 		.card {
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
 		}
+
 		#weather-details {
 			font-size: 2vh;
 			text-align: center;
 		}
+
 		#back {
 			margin-top: 1vh;
 		}
+
 		.background-2 {
 			/* background-image: linear-gradient(#61B5D5, #8D61D5, #F3B8C9); */
 			background-image: url("../styles/background-2\ copy.png");
@@ -465,6 +541,7 @@
 			justify-content: flex-start;
 			align-items: center;
 		}
+		
 		.forecast {
 			display: flex;
 			flex-flow: row wrap;
@@ -478,6 +555,7 @@
 			margin-right: 0px;
 			padding: 0px;
 		}
+
 		#fore {
 			background : rgba(250,250,250, 0.7);
 			height: 33vh;
@@ -494,10 +572,12 @@
 			opacity: 0.7;
 			transition: all .2s ease-in-out;
 		}
+
 		#fore:hover {
 			opacity: 1.0;
 			transform: scale(1.1); 
 		}
+
 		#weather-pic {
 			width: 13vh;
 			height: 13vh;
@@ -507,6 +587,7 @@
 			background-color: rgba(0,0,0, 0.3);
 			border-radius: 30px;
 		}
+
 		/* #fore-1 {
 			background : rgba(250, 250, 250, 0.7);
 			height: 30vh;
@@ -523,17 +604,20 @@
 			border-radius: 30px;
 			margin-top: 7px;
 		}
+
 		#seven-forecast {
 			font-size: 3vh;
 			font-weight: 400;
 			overflow: hidden;
 			margin-left: 1vw;
 		}
+
 		@keyframes bouncing {
 			0% {bottom: 1vh;}
 			50% {bottom: 2vh;}
 			100% {bottom: 1vh;}
 		}
+
 		#arrow {
 			/* animation: bouncing 1s infinite ease-in-out; */
 			bottom: 0vh;
@@ -550,6 +634,7 @@
 			/* border-right: 1mm solid black;
 			border-left: 1mm solid black; */
 		}
+
 		#arrow-bkg {
 			animation: bouncing 1s infinite ease-in-out;
 			bottom: 0vh;
@@ -565,14 +650,17 @@
 			position: fixed;
 			font-family: 'Mandali', sans-serif;
 		}
+
 		#arrow p {
 			font-size: 4vh;
 			color: black;
 			text-align: center;
 		}
+
 		#arrow p:hover {
 			color: white;
 		}
+
 		.sub-background-2 {
 			border-radius: 30px;
 			width: 95vw;
@@ -580,10 +668,12 @@
 			padding-top: 2vh;
 			padding-bottom: 2vh;
 		}
+
 		.active, #celsius:hover, #farenheit:hover {
 			background-color: #666;
 			color: white;
 		}
+		
 		#farenheit, #celsius {
 			margin-top: 1vh;
 		}
@@ -609,7 +699,7 @@
 									<input id="longitude" type="text" autocomplete="off" name="longitude" placeholder="Enter longitude" required>
 								</div>
 								<div class="form-group mx-sm-3 mb-2">
-									<button id="update" class="btn btn-light">Find</button>
+									<button id="update" class="btn btn-light">Check</button>
 								</div>
 							</div>
 						</div>
