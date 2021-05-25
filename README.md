@@ -1,13 +1,14 @@
 # Weather Teller ⛅️
 
 ## Introduction
-A simple web app project built to review EJS and Ajax/JQuery and to have fun with designing characters in the app.
+A simple web app project built to review Ajax/JQuery and API integration and to have fun with designing characters in the app.
 
 ### Purpose
 This app allows you to look at the current weather anywhere in the world by clicking locations on the displayed map or manually adding longitude/latitude values.
 Based on the current weather, the potato character will change to reflect the weather!
 
 UPDATED (5/21): Now has 7-day forecast feature + fahrenheit/celsius conversion!
+
 UPDATED (5/25): Snow designs fully added now!
 
 <img src=https://github.com/ac-hj/weather-teller/blob/master/demo/snow-demo.png alt="drawing" width="140" height="250"/>
