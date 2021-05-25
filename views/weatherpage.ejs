@@ -343,7 +343,7 @@
 						</div>
 					`
 					}
-					
+					cloud = "snow";
 					// displaying designs based on the weather 
 					if (cloud.toLowerCase().includes("cloud")) {
 						$("#me").attr('src',"../styles/Potato_Cloud.gif");
@@ -352,7 +352,9 @@
 					} else if (cloud.toLowerCase().includes("sun") || cloud.toLowerCase().includes("clear") ) {
 						$("#me").attr('src',"../styles/Potato_Sunny.png");
 						$("#me").css("width", "20vw");
-					} 
+					} else if (cloud.toLowerCase().includes("snow")) {
+						$("#me").attr('src',"../styles/Potato_Snow.png");
+					}
 
 					$('#back').on("click", function() {
 						$(".sub-info").css("display", "flex");
