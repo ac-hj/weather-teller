@@ -8,6 +8,9 @@ This app allows you to look at the current weather anywhere in the world by clic
 Based on the current weather, the potato character will change to reflect the weather!
 
 UPDATED (5/21): Now has 7-day forecast feature + fahrenheit/celsius conversion!
+UPDATED (5/25): Snow designs fully added now!
+
+<img src=https://github.com/ac-hj/weather-teller/blob/master/demo/snow-demo.png alt="drawing" width="140" height="250"/>
 
 ### Demo
 
@@ -47,7 +50,7 @@ Screenshots of the app:
 ##  Next Steps
 - [x] Add 7-day weather forecast feature (5/21)
 - [x] Add celsius/farenheit change (5/21)
-- [ ] Add more potato character designs to account for other different weathers. Currently there are sunny, cloudy, and rainy
+- [x] Add more potato character designs to account for other different weathers. Currently there are sunny, cloudy, and rainy (5/25)
 
 ## Random learnings:
 - To delete some commit histories, do git log, git rebase git rebase -i <commit_hash>, and then change pick to drop. and then push?
