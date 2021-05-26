@@ -17,7 +17,15 @@ UPDATED (5/25): Snow designs fully added now!
 
 Sample demo of the weather page:
 
-*The video may be a bit laggy*
+How the webpage looks currently as of 5/26:
+
+I decided to change the background designs completely after seeing that the background was "drawing too much attention" from the user and hence a simpler design !
+
+*The videos may be a bit laggy*
+
+<img src=https://github.com/ac-hj/weather-teller/blob/master/demo/weather-app-demo-v2.gif alt="drawing" width="600"/>
+
+<--------------- How the app looked before the design makeover --------------->
 
 <img src=https://github.com/ac-hj/weather-teller/blob/master/demo/demo-vid.gif alt="drawing" width="600"/>
 
