@@ -15,19 +15,9 @@ How the webpage looks currently as of 5/26:
 
 I decided to change the background designs completely after seeing that the background was "drawing too much attention" from the user and hence a simpler design !
 
-*The videos may be a bit laggy*
+*The video may be a bit laggy*
 
 <img src=https://github.com/ac-hj/weather-teller/blob/master/demo/weather-app-demo-v2.gif alt="drawing" width="1000"/>
-
-<--------------- How the app looked before the design makeover --------------->
-
-<img src=https://github.com/ac-hj/weather-teller/blob/master/demo/demo-vid.gif alt="drawing" width="600"/>
-
-Screenshots of the app:
-
-<img src="https://github.com/ac-hj/weather-teller/blob/master/demo/home-demo.png" alt="homepage" width="600"/>
-<img src=https://github.com/ac-hj/weather-teller/blob/master/demo/weather-demo.png alt="weather-page" width="600"/>
-<img src=https://github.com/ac-hj/weather-teller/blob/master/styles/forecast.png alt="forecast" width="600"/>
 
 ### How to use
 1) Sign up for Google Maps and OpenWeatherMap APIs -- both are free to use 
@@ -65,3 +55,17 @@ UPDATED (5/25): Snow designs fully added now!
 - To delete some commit histories, do git log, git rebase git rebase -i <commit_hash>, and then change pick to drop. and then push?
 https://stackoverflow.com/questions/30893040/git-remove-commit-from-history
 - also git reset --hard doesn't work sometimes :(( gets confusing when using different branches
+
+## Before the design makeover
+
+<img src=https://github.com/ac-hj/weather-teller/blob/master/demo/demo-vid.gif alt="drawing" width="500"/>
+
+Screenshots of the app:
+
+<p float="left">
+  <img src="https://github.com/ac-hj/weather-teller/blob/master/demo/home-demo.png" alt="homepage" width="310" display="inline"/>
+  <img src=https://github.com/ac-hj/weather-teller/blob/master/demo/weather-demo.png alt="weather-page" width="310"/>
+  <img src=https://github.com/ac-hj/weather-teller/blob/master/styles/forecast.png alt="forecast" width="310"/>
+</p>
+
+
