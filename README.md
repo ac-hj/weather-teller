@@ -23,7 +23,7 @@ I decided to change the background designs completely after seeing that the back
 
 *The videos may be a bit laggy*
 
-<img src=https://github.com/ac-hj/weather-teller/blob/master/demo/weather-app-demo-v2.gif alt="drawing" width="600"/>
+<img src=https://github.com/ac-hj/weather-teller/blob/master/demo/weather-app-demo-v2.gif alt="drawing" width="1000"/>
 
 <--------------- How the app looked before the design makeover --------------->
 
