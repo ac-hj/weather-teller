@@ -7,12 +7,6 @@ A simple web app project built to review Ajax/JQuery and API integration and to 
 This app allows you to look at the current weather anywhere in the world by clicking locations on the displayed map or manually adding longitude/latitude values.
 Based on the current weather, the potato character will change to reflect the weather!
 
-UPDATED (5/21): Now has 7-day forecast feature + fahrenheit/celsius conversion!
-
-UPDATED (5/25): Snow designs fully added now!
-
-<img src=https://github.com/ac-hj/weather-teller/blob/master/demo/snow-demo.png alt="drawing" width="140" height="250"/>
-
 ### Demo
 
 Sample demo of the weather page:
@@ -60,6 +54,12 @@ Screenshots of the app:
 - [x] Add 7-day weather forecast feature (5/21)
 - [x] Add celsius/farenheit change (5/21)
 - [x] Add more potato character designs to account for other different weathers. Currently there are sunny, cloudy, and rainy (5/25)
+
+UPDATED (5/21): Now has 7-day forecast feature + fahrenheit/celsius conversion!
+
+UPDATED (5/25): Snow designs fully added now!
+
+<img src=https://github.com/ac-hj/weather-teller/blob/master/demo/snow-demo.png alt="drawing" width="140" height="250"/>
 
 ## Random learnings:
 - To delete some commit histories, do git log, git rebase git rebase -i <commit_hash>, and then change pick to drop. and then push?
