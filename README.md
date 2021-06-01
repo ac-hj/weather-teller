@@ -60,12 +60,8 @@ https://stackoverflow.com/questions/30893040/git-remove-commit-from-history
 
 <img src=https://github.com/ac-hj/weather-teller/blob/master/demo/demo-vid.gif alt="drawing" width="500"/>
 
-Screenshots of the app:
 
-<p float="left">
-  <img src="https://github.com/ac-hj/weather-teller/blob/master/demo/home-demo.png" alt="homepage" width="300" display="inline"/>
-  <img src=https://github.com/ac-hj/weather-teller/blob/master/demo/weather-demo.png alt="weather-page" width="300"/>
-  <img src=https://github.com/ac-hj/weather-teller/blob/master/styles/forecast.png alt="forecast" width="300"/>
-</p>
+  <img src=https://github.com/ac-hj/weather-teller/blob/master/styles/forecast.png alt="forecast" width="500"/>
+
 
 
