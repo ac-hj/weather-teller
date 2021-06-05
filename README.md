@@ -22,7 +22,7 @@ I decided to change the background designs completely after seeing that the back
 ### How to use
 1) Sign up for Google Maps and OpenWeatherMap APIs -- both are free to use 
 2) Replace "[Your API Key]" with yours in weatherpage.ejs file
-3) Run node app.js on the terminal and go to http://localhost:8080/ on browser
+3) Run `node app.js` on the terminal and go to http://localhost:8080/ on browser
 
 ## Tech Stack
 - Node.js
