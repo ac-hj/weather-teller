@@ -26,6 +26,7 @@ I decided to change the background designs completely after seeing that the back
 
 ## Tech Stack
 - Node.js
+- Express
 - EJS
 - Ajax/JQuery
 - HTML/CSS
