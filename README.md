@@ -1,6 +1,6 @@
 # Weather Teller ⛅️
 
-![IMG_3932](https://user-images.githubusercontent.com/58259611/147995943-c8d9f2e9-096c-4721-8e90-c95be8e96a75.png)
+![IMG_3933](https://user-images.githubusercontent.com/58259611/147996130-02c9d6a2-f2dd-4d56-954d-77aa8ffc5c27.jpeg)
 
 ## Introduction
 A simple web app project built to review Ajax/JQuery and API integration and to have fun with designing characters in the app.
